@@ -1,0 +1,4 @@
+--- See https://docs.docker.com/engine/installation/ubuntulinux/
+
+- name: Add gpg key
+  apt_key: keyserver={{ apt_key.keyserver }} id={{ apt_key.recv_key }}
