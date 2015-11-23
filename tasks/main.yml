@@ -1,4 +1,13 @@
---- See https://docs.docker.com/engine/installation/ubuntulinux/
-
-- name: Add gpg key
+- name: Add gpg key for docker repository
   apt_key: keyserver={{ apt_key.keyserver }} id={{ apt_key.recv_key }}
+
+- name: Add docker repository
+  apt_repository: repo="{{ apt_repository }}"
+
+- name: Install docker
+  apt: name=docker-engine
+  notify: restart docker
+
+- name: Add user to docker group
+  sudo: yes
+  user: name={{ user }} groups=docker append=yes
